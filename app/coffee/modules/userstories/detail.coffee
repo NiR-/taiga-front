@@ -548,7 +548,7 @@ UsMilestoneAssignmentButtonDirective = ($rootscope, $rs, $loading, $modelTransfo
     # Display the milestone assignment of a US and you can edit it
     #
     # Example:
-    #   tg-us-milestone-assignment(ng-model="us")
+    #   tg-us-milestone-assignment-button(ng-model="us")
     #
     # Requirements:
     #   - US object (ng-model)

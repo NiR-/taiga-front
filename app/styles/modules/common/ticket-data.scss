@@ -261,22 +261,24 @@
     }
 }
 
-.ticket-sprint .assign-us-to-sprint-button {
-    cursor: pointer;
-    display: flex;
-    margin-bottom: 1.5em;
+.ticket-sprint {
+    .assign-us-to-sprint-button {
+        cursor: pointer;
+        display: flex;
+        margin-bottom: 1.5em;
 
-    .current-sprint {
-        width: 100%;
-    }
-    .icon-edit {
-        opacity: 0;
-    }
-
-    &:hover {
+        .current-sprint {
+            width: 100%;
+        }
         .icon-edit {
-            opacity: 1;
-            transition: opacity .3s linear;
+            opacity: 0;
+        }
+
+        &:hover {
+            .icon-edit {
+                opacity: 1;
+                transition: opacity .3s linear;
+            }
         }
     }
 
