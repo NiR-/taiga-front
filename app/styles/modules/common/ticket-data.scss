@@ -115,6 +115,13 @@
     margin-bottom: 1rem;
 }
 
+.ticket-milestone {
+    margin-bottom: .5rem;
+    b {
+        @include font-type(bold);
+    }
+}
+
 .ticket-watch {
     .ticket-watch-title {
         @include font-type(bold);
@@ -251,5 +258,29 @@
     }
     a {
         display: block;
+    }
+}
+
+.ticket-sprint .assign-us-to-sprint-button {
+    cursor: pointer;
+    display: flex;
+    margin-bottom: 1.5em;
+
+    .current-sprint {
+        width: 100%;
+    }
+    .icon-edit {
+        opacity: 0;
+    }
+
+    &:hover {
+        .icon-edit {
+            opacity: 1;
+            transition: opacity .3s linear;
+        }
+    }
+
+    .lightbox-assign-related-sprint {
+        width: 700px;
     }
 }

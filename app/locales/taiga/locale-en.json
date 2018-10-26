@@ -1211,6 +1211,9 @@
         "OWNER_US": "This User Story belongs to",
         "RELATE_TO_EPIC": "Link to Epic",
         "REMOVE_RELATIONSHIP_WITH_EPIC": "Remove Epic relationship",
+        "ACTION_ATTACH_SPRINT": "Attach to Sprint",
+        "CHOOSE_SPRINT": "Which Sprint?",
+        "FILTER_SPRINTS": "Filter Sprints",
         "TRIBE": {
             "PUBLISH": "Publish as Gig in Taiga Tribe",
             "PUBLISH_INFO": "More info",

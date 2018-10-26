@@ -1211,6 +1211,9 @@
         "OWNER_US": "Ce récit Utilisateur fait partie de ",
         "RELATE_TO_EPIC": "Lien vers l'épopée",
         "REMOVE_RELATIONSHIP_WITH_EPIC": "Remove Epic relationship",
+        "ACTION_ATTACH_SPRINT": "Joindre à un Sprint",
+        "CHOOSE_SPRINT": "Quel Sprint?",
+        "FILTER_SPRINTS": "Filtre",
         "TRIBE": {
             "PUBLISH": "Publier en tant que Gig sur Taiga Tribe ",
             "PUBLISH_INFO": "Plus d'informations",

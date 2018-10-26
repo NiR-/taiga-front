@@ -543,3 +543,80 @@ UsClientRequirementButtonDirective = ($rootscope, $tgrepo, $confirm, $loading, $
 
 module.directive("tgUsClientRequirementButton", ["$rootScope", "$tgRepo", "$tgConfirm", "$tgLoading", "$tgQueueModelTransformation", "$tgTemplate", "$compile",
                                                  UsClientRequirementButtonDirective])
+
+UsMilestoneAssignmentButtonDirective = ($rootscope, $rs, $loading, $modelTransform, $template, $compile, lightboxService) ->
+    # Display the milestone assignment of a US and you can edit it
+    #
+    # Example:
+    #   tg-us-milestone-assignment(ng-model="us")
+    #
+    # Requirements:
+    #   - US object (ng-model)
+    #   - scope.project object
+
+    template = $template.get('us/us-milestone-assignment.html', true)
+
+    sortMilestones = (a, b) ->
+        return switch
+            when a.estimated_start > b.estimated_start then 1
+            when a.estimated_start < b.estimated_start then -1
+            when a.estimated_start == b.estimated_start then switch
+                when a.estimated_finish > b.estimated_finish then 1
+                when a.estimated_finish < b.estimated_finish then -1
+                else 0
+
+    link = ($scope, $el, $attrs, $model) ->
+        render = (us, availableMilestones) ->
+            selectedSprint = availableMilestones.find (item) ->
+                return item.id == us.milestone
+
+            html = template({
+                selectedSprint,
+                availableMilestones,
+            })
+
+            html = $compile(html)($scope)
+            $el.html(html)
+
+        $rs.sprints.list($scope.projectId, null).then (data) ->
+            $scope.milestones = data.milestones.sort(sortMilestones)
+
+        $scope.$watch $attrs.ngModel, (us) ->
+            availableMilestones = $scope.milestones
+            render(us, availableMilestones) if us? and availableMilestones?
+
+        $scope.$watch 'milestones', (availableMilestones) ->
+            us = $scope.us
+            render(us, availableMilestones) if us? and availableMilestones?
+
+        $el.on "click", ".assign-us-to-sprint-button", (event) ->
+          event.preventDefault()
+          event.stopPropagation()
+          lightboxService.open($el.find(".lightbox-assign-us-to-sprint"))
+
+        $scope.saveUserStoryToSprint = (selectedSprint, event) ->
+            currentLoading = $loading().target($(event.currentTarget)).start()
+            us = $scope.us
+            us.setAttr('milestone', selectedSprint.id)
+
+            transform = $modelTransform.save (item) ->
+                us.setAttr('milestone', selectedSprint.id)
+                return item
+
+            transform.then ->
+                currentLoading.finish()
+                lightboxService.close($el.find(".lightbox-assign-us-to-sprint"))
+                $rootscope.$broadcast("assign-us-to-sprint:success", selectedSprint.id)
+
+        $scope.$on "$destroy", ->
+            $scope.milestones = []
+            $el.off()
+
+    return {
+      link: link,
+      restrict: "EA",
+      require: "ngModel"
+    }
+
+module.directive("tgUsMilestoneAssignmentButton", ["$rootScope", "$tgResources", "$tgLoading", "$tgQueueModelTransformation"
+                                             "$tgTemplate", "$compile", "lightboxService", UsMilestoneAssignmentButtonDirective])

@@ -1,0 +1,31 @@
+a.assign-us-to-sprint-button
+  div.current-sprint
+    b(translate="Sprint:")
+    &nbsp;
+    <%- selectedSprint.name %>
+
+  div.edit-sprint-button
+    tg-svg.detail-edit(svg-icon="icon-edit")
+
+.lightbox.lightbox-assign-us-to-sprint
+    tg-lightbox-close
+
+    div.lightbox-assign-related-sprint
+        h2.title {{ 'US.ACTION_ATTACH_SPRINT' | translate }}
+        tg-search-list(
+            label="{{ 'US.CHOOSE_SPRINT' | translate }}"
+            placeholder="{{ 'US.FILTER_SPRINTS' | translate }}"
+            items="milestones"
+            ng-model="selectedSprint"
+            filter-by="['name', 'estimated_start', 'estimated_finish']"
+            project="project"
+            item-type="sprint"
+            filter-closed="true"
+        )
+        button.button-green.select-option(
+            href=""
+            ng-click="saveUserStoryToSprint(selectedSprint, $event)"
+            tg-loading="vm.loading"
+            translate="COMMON.SAVE"
+            ng-disabled="!selectedSprint"
+        )
