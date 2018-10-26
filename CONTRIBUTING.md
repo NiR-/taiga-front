@@ -8,7 +8,7 @@ By contributing to Taiga Agile LLC., You accept and agree to the following terms
 
 All Contributions are subject to the following DCO + License terms.
 
-[DCO + License](https://github.com/taiga/taiga-front/blob/master/DCOLICENSE)
+[DCO + License](https://github.com/taigaio/taiga-front/blob/master/DCOLICENSE)
 
 _This notice should stay as the first item in the CONTRIBUTING.md file._
 
